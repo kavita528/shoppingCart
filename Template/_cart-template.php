@@ -71,7 +71,7 @@
 
                     <div class="col-sm-2 text-right">
                         <div class="font-size-20 text-danger font-baloo">
-                            $<span class="product_price" data-id="<?php echo $item['item_id'] ?? '0'; ?>"><?php echo $item['item_price'] ?? 0; ?></span>
+                        Rs&nbsp;&nbsp;<span class="product_price" data-id="<?php echo $item['item_id'] ?? '0'; ?>"><?php echo $item['item_price'] ?? 0; ?></span>
                         </div>
                     </div>
                 </div>
@@ -83,13 +83,65 @@
                 ?>
             </div>
             <!-- subtotal section-->
-            <div class="col-sm-3">
-                <div class="sub-total border text-center mt-2">
-                    <h6 class="font-size-12 font-rale text-success py-3"><i class="fas fa-check"></i> Your order is eligible for FREE Delivery.</h6>
-                    <div class="border-top py-4">
-                        <h5 class="font-baloo font-size-20">Subtotal ( <?php echo isset($subTotal) ? count($subTotal) : 0; ?> item):&nbsp; <span class="text-danger">$<span class="text-danger" id="deal-price"><?php echo isset($subTotal) ? $Cart->getSum($subTotal) : 0; ?></span> </span> </h5>
-                        <button type="submit" class="btn btn-warning mt-3">Proceed to Buy</button>
-                    </div>
+            <div class="col-sm-3 px">
+               
+                    <h6 class="font-size-12 font-rale text-success py-3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fas fa-check"></i> Your order is eligible for FREE Delivery.</h6>
+                    
+                    <h5 class="font-baloo font-size-20">&nbsp;&nbsp;&nbsp;Subtotal ( <?php echo isset($subTotal) ? count($subTotal) : 0; ?> item):&nbsp; <span class="text-danger">Rs&nbsp;&nbsp;<span class="text-danger" id="deal-price"><?php echo isset($subTotal) ? $Cart->getSum($subTotal) : 0; ?></span> </span> </h5>
+                        <form method="post" action="paytm/PaytmKit/pgRedirect.php">
+
+             <table class="table table-striped">
+    <thead>
+      <tr>
+      <th>S.No</th>
+					<th>Label</th>
+					<th>Value</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+      <td>1</td>
+					<td><label>ORDER_ID::*</label></td>
+					<td><input id="ORDER_ID" tabindex="1" maxlength="12" size="12"
+						name="ORDER_ID" autocomplete="off"
+						value="<?php echo  "ORDS" . rand(10000,99999999)?>">
+					</td>
+      </tr>
+      <tr>
+      <td>2</td>
+					<td><label>CUSTID ::*</label></td>
+					<td><input id="CUST_ID" tabindex="1" maxlength="12" size="12" name="CUST_ID" autocomplete="off" value="CUST001"></td>
+				</tr>
+      <tr>
+      <td>3</td>
+					<td><label>INDUSTRY :</label></td>
+					<td><input id="INDUSTRY_TYPE_ID" tabindex="4" maxlength="12" size="12" name="INDUSTRY_TYPE_ID" autocomplete="off" value="Retail"></td>
+                </tr>
+                <tr>
+					<td>4</td>
+					<td><label>Channel ::*</label></td>
+					<td><input id="CHANNEL_ID" tabindex="4" maxlength="12"
+						size="12" name="CHANNEL_ID" autocomplete="off" value="WEB">
+					</td>
+				</tr>
+				<tr>
+					<td>5</td>
+					<td><label>txnAmount*</label></td>
+					<td><input title="TXN_AMOUNT" tabindex="10"
+						type="text"   maxlength="12" size="12" name="TXN_AMOUNT"
+						value="<?php echo isset($subTotal) ? $Cart->getSum($subTotal) : 0; ?>">
+					</td>
+				</tr>
+				<tr>
+					<td></td>
+					<td></td>
+					<td><button class="btn btn-primary"> Pay Now</button></td>
+				</tr>
+		
+    </tbody>
+  </table>     
+         </div>
+                   
                 </div>
             </div>
             <!-- !subtotal section-->
@@ -98,3 +150,6 @@
     </div>
 </section>
 <!-- !Shopping cart section  -->
+	</form>
+</body>
+</html>

@@ -12,7 +12,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
 ?>
 <section id="new-phones">
     <div class="container">
-        <h4 class="font-rubik font-size-20">New Phones</h4>
+        <h4 class="font-rubik font-size-20">Available Products</h4>
         <hr>
 
         <!-- owl carousel -->
@@ -31,7 +31,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
                                 <span><i class="far fa-star"></i></span>
                             </div>
                             <div class="price py-2">
-                                <span>$<?php echo $item['item_price'] ?? '0' ; ?></span>
+                                <span>Rs&nbsp;&nbsp;<?php echo $item['item_price'] ?? '0' ; ?></span>
                             </div>
                             <form method="post">
                                 <input type="hidden" name="item_id" value="<?php echo $item['item_id'] ?? '1'; ?>">
